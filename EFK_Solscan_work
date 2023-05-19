@@ -1,0 +1,9 @@
+import requests
+contract_address = '7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs'
+api_endpoint = f'https://api.solscan.io/account?address={contract_address}'
+api_key = 'mFjdGlvbiI6InRva2VuLWFwaSIsImlhdCI6MTY4MzQ3NDIwMn0.5SNyK9sEN1AQKjSnSLMbG45xgZfBfCvG1Zcvjq6kkqI'
+headers = {'token': api_key}
+response = requests.get(api_endpoint, headers=headers)
+data = response.json()
+total_holders = data['data']['account']['owner']['info']['owner']['numberOfValidators']
+print(f'Total holders: {total_holders}')
