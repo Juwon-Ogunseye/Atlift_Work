@@ -1,0 +1,19 @@
+from binance.client import Client
+api_key = ''
+api_secret = ''
+
+client = Client(api_key, api_secret, use_server_time=True)
+
+futures_positions = client.futures_position_information()
+
+data = []
+for position in futures_positions:
+    symbol = position['symbol']
+    position_size = float(position['positionAmt'])
+    data.append([symbol, position_size])
+import csv
+
+with open('futures_positions.csv', mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['Symbol', 'Position Size'])
+    writer.writerows(data)
